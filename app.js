@@ -278,8 +278,12 @@ function selectLevel(level) {
     userData.level = level;
 
     console.log("Nível selecionado:", level);
-    
-    // Próxima etapa (iremos construir no próximo passo)
+
+    // Por enquanto só vamos avançar para a próxima etapa lógica.
+    // Mas essa etapa ainda NÃO existe, então vamos colocar um placeholder:
+    alert("Nível selecionado: " + level + "\nA próxima etapa será carregada em seguida.");
+}
+
     showNextStage();
   function showLevelStep() {
     document.getElementById("choose-goal").classList.add("hidden");
