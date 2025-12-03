@@ -48,49 +48,109 @@ function showWelcomeScreen() {
 //  ESCOLHA DO NÍVEL
 // =========================
 function showLevelSelection() {
-  render(`
-    <div class="screen" style="padding: 45px 30px;">
+    render(`
+        <div class="screen" style="padding: 45px 30px;">
 
-      <h1 style="font-size: 2rem;">Escolha seu nível</h1>
-      <p style="opacity:0.8; margin-bottom: 25px; margin-top: 8px;">
-        Isso ajuda a personalizar seus testes.
-      </p>
+            <h1 style="font-size: 2rem; margin-bottom: 10px;">
+                Qual é o seu nível atual?
+            </h1>
 
-      <div style="display:flex; flex-direction:column; gap:15px;">
+            <p style="opacity:0.8; margin-bottom:25px;">
+                Isso ajuda a IA a montar um plano ideal para você.
+            </p>
 
-        <button class="level-btn" data-level="iniciante">
-          🟢 Iniciante
-          <span style="display:block; opacity:0.7; font-size:0.85rem;">
-            Começar com desafios leves
-          </span>
-        </button>
+            <div style="display:flex; flex-direction:column; gap:15px;">
 
-        <button class="level-btn" data-level="intermediario">
-          🟡 Intermediário
-          <span style="display:block; opacity:0.7; font-size:0.85rem;">
-            Nível equilibrado e dinâmico
-          </span>
-        </button>
+                <button class="levelBtn" data-level="iniciante">
+                    🟣 Iniciante
+                    <span>Começando agora, preciso de orientação clara.</span>
+                </button>
 
-        <button class="level-btn" data-level="avancado">
-          🔴 Avançado
-          <span style="display:block; opacity:0.7; font-size:0.85rem;">
-            Desafios intensos e rápidos
-          </span>
-        </button>
+                <button class="levelBtn" data-level="intermediario">
+                    🟣 Intermediário
+                    <span>Já tenho alguma experiência, quero melhorar.</span>
+                </button>
 
-      </div>
+                <button class="levelBtn" data-level="avancado">
+                    🟣 Avançado
+                    <span>Busco alta performance e otimização máxima.</span>
+                </button>
 
-    </div>
-  `);
+            </div>
 
-  document.querySelectorAll(".level-btn").forEach(btn => {
-    btn.addEventListener("click", () => {
-      const level = btn.getAttribute("data-level");
-      saveLevel(level);
+        </div>
+    `);
+
+    // ativa os botões agora que o HTML foi criado
+    document.querySelectorAll(".levelBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const level = btn.getAttribute("data-level");
+            saveLevel(level);
+        });
     });
-  });
 }
+function showLevelSelection() {
+    render(`
+        <div class="screen" style="padding: 45px 30px;">
+
+            <h1 style="font-size: 2rem; margin-bottom: 10px;">
+                Qual é o seu nível atual?
+            </h1>
+
+            <p style="opacity:0.8; margin-bottom:25px;">
+                Isso ajuda a IA a montar um plano ideal para você.
+            </p>
+
+            <div style="display:flex; flex-direction:column; gap:15px;">
+
+                <button class="levelBtn" data-level="iniciante">
+                    🟣 Iniciante
+                    <span>Começando agora, preciso de orientação clara.</span>
+                </button>
+
+                <button class="levelBtn" data-level="intermediario">
+                    🟣 Intermediário
+                    <span>Já tenho alguma experiência, quero melhorar.</span>
+                </button>
+
+                <button class="levelBtn" data-level="avancado">
+                    🟣 Avançado
+                    <span>Busco alta performance e otimização máxima.</span>
+                </button>
+
+            </div>
+
+        </div>
+    `);
+
+    // ativa os botões agora que o HTML foi criado
+    document.querySelectorAll(".levelBtn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const level = btn.getAttribute("data-level");
+            saveLevel(level);
+        });
+    });
+}
+function saveLevel(level) {
+    localStorage.setItem("userLevel", level);
+    console.log("Nível salvo:", level);
+
+    // Agora inicia automaticamente os testes
+    startMemoryTest(app, () => {
+        startFocusTest(app, () => {
+            startLogicTest(app, () => {
+                showFinalResults();
+            });
+        });
+    });
+}
+function saveGoal(goal) {
+    localStorage.setItem("userGoal", goal);
+
+    // Depois de escolher objetivo → vai para níveis
+    showLevelSelection();
+}
+
 
 // =========================
 // SALVA O OBJETIVO E INICIA TESTES
