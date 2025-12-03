@@ -63,6 +63,37 @@ button {
     background: linear-gradient(130deg, #7a30ff, #a75bff);
     border: none;
     border-radius: 12px;
+.goal-btn {
+    width: 100%;
+    padding: 18px;
+    border-radius: 14px;
+    text-align: left;
+
+    background: rgba(150, 70, 255, 0.12);
+    border: 1px solid rgba(150, 70, 255, 0.25);
+    box-shadow: 0 0 15px rgba(150, 70, 255, 0.25);
+
+    font-size: 1.2rem;
+    color: #fff;
+    font-weight: 600;
+
+    cursor: pointer;
+    transition: 0.25s;
+    position: relative;
+}
+
+.goal-btn span {
+    display: block;
+    font-size: 0.85rem;
+    opacity: 0.7;
+    margin-top: 3px;
+}
+
+.goal-btn:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 22px rgba(150, 70, 255, 0.45);
+    background: rgba(150, 70, 255, 0.2);
+}
 
     font-size: 1.1rem;
     color: #fff;
