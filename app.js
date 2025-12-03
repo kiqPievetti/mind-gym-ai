@@ -268,3 +268,17 @@ function startTest() {
         showResults(reaction);
     };
 }
+
+function showLevelStep() {
+    document.getElementById("choose-goal").classList.add("hidden");
+    document.getElementById("choose-level").classList.remove("hidden");
+}
+
+function selectLevel(level) {
+    userData.level = level;
+
+    console.log("Nível selecionado:", level);
+    
+    // Próxima etapa (iremos construir no próximo passo)
+    showNextStage();
+}
