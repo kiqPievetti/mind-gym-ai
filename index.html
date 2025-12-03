@@ -7,6 +7,29 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Step: Choose Level -->
+<div id="choose-level" class="step hidden">
+    <h2 class="step-title">Qual é o seu nível atual?</h2>
+    <p class="step-subtitle">Isso ajuda a IA a montar um plano ideal para você.</p>
+
+    <div class="option-grid">
+        <button class="option-card" onclick="selectLevel('iniciante')">
+            <h3>Iniciante</h3>
+            <p>Começando agora, preciso de orientação clara.</p>
+        </button>
+
+        <button class="option-card" onclick="selectLevel('intermediario')">
+            <h3>Intermediário</h3>
+            <p>Já tenho alguma experiência, quero melhorar.</p>
+        </button>
+
+        <button class="option-card" onclick="selectLevel('avancado')">
+            <h3>Avançado</h3>
+            <p>Busco alta performance e otimização máxima.</p>
+        </button>
+    </div>
+</div>
+
   <div id="app"></div>
   <script type="module" src="app.js"></script>
 </body>
