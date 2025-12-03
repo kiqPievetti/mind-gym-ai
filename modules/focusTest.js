@@ -1,49 +1,51 @@
-function startFocusTest() {
-    let attempts = 12;
-    let points = 0;
-    let clickable = false;
+// modules/focusTest.js
+export function startFocusTest(app, onDone) {
+  let attempts = 10;
+  let score = 0;
 
-    function showStimulus() {
-        if (attempts <= 0) return finishFocusTest(points);
+  function nextStimulus() {
+    if (attempts <= 0) return finish();
 
-        attempts--;
+    attempts--;
+    const isGo = Math.random() < 0.6; // verdadeiro = clicar
+    renderScreen(`
+      <div class="screen">
+        <h1>Foco Sustentado</h1>
+        <p>Clique no botão apenas quando estiver verde.</p>
+        <div id="box" style="width:160px;height:160px;border-radius:12px;margin:20px auto;background:${isGo ? "green" : "red"}"></div>
+        <div style="display:flex;gap:12px;justify-content:center;">
+          <button id="clicked">Cliquei</button>
+          <button id="skip">Pular</button>
+        </div>
+      </div>
+    `);
 
-        let isGo = Math.random() < 0.6; // 60% verde, 40% vermelho
-        clickable = isGo;
+    document.getElementById("clicked").addEventListener("click", () => {
+      if (isGo) score += 1;
+      else score -= 1;
+      nextStimulus();
+    });
+    document.getElementById("skip").addEventListener("click", () => {
+      // pular conta como neutro
+      nextStimulus();
+    });
+  }
 
-        app.innerHTML = `
-            <div class="screen">
-                <h1>Foco Sustentado</h1>
-                <p>Clique APENAS quando aparecer verde.</p>
-                <div style="
-                    width:150px; height:150px; margin:30px auto;
-                    border-radius:12px; 
-                    background:${isGo ? 'green' : 'red'};
-                "></div>
+  function finish() {
+    if (score < 0) score = 0;
+    renderScreen(`
+      <div class="screen">
+        <h1>Resultado: Foco</h1>
+        <p>Pontuação: <strong>${score}</strong></p>
+        <button id="proximoLogica">Próximo: Lógica</button>
+      </div>
+    `);
+    document.getElementById("proximoLogica").addEventListener("click", () => onDone && onDone());
+  }
 
-                <button onclick="userClicked()">Cliquei</button>
-            </div>
-        `;
-    }
+  function renderScreen(html) {
+    app.innerHTML = html;
+  }
 
-    window.userClicked = function() {
-        if (clickable) points++;      // clicou certo
-        if (!clickable) points -= 1;  // clicou errado
-
-        showStimulus();
-    };
-
-    window.finishFocusTest = function(score) {
-        if (score < 0) score = 0;
-
-        app.innerHTML = `
-            <div class="screen">
-                <h1>Resultado: Foco</h1>
-                <p>Pontuação: <strong>${score}</strong> de 12</p>
-                <button onclick="startLogicTest()">Próximo Teste</button>
-            </div>
-        `;
-    };
-
-    showStimulus();
+  nextStimulus();
 }
