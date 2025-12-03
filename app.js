@@ -44,38 +44,39 @@ function showWelcomeScreen() {
 // =========================
 //  ESCOLHA DE OBJETIVO
 // =========================
-function startOnboarding() {
+// =========================
+//  ESCOLHA DO NÍVEL
+// =========================
+function showLevelSelection() {
   render(`
     <div class="screen" style="padding: 45px 30px;">
 
-      <h1 style="font-size: 2.1rem; margin-bottom: 10px;">
-        Vamos personalizar seu treino
-      </h1>
-
-      <p style="font-size: 1.1rem; margin-bottom: 25px; opacity: 0.85;">
-        Escolha seu foco principal.
+      <h1 style="font-size: 2rem;">Escolha seu nível</h1>
+      <p style="opacity:0.8; margin-bottom: 25px; margin-top: 8px;">
+        Isso ajuda a personalizar seus testes.
       </p>
 
-      <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+      <div style="display:flex; flex-direction:column; gap:15px;">
 
-        <button data-goal="memoria" class="goal-btn">
-            🧠 Melhorar Memória
-            <span>Exercícios de retenção e padrões</span>
+        <button class="level-btn" data-level="iniciante">
+          🟢 Iniciante
+          <span style="display:block; opacity:0.7; font-size:0.85rem;">
+            Começar com desafios leves
+          </span>
         </button>
 
-        <button data-goal="foco" class="goal-btn">
-            🎯 Aumentar Foco
-            <span>Reação, atenção sustentada e precisão</span>
+        <button class="level-btn" data-level="intermediario">
+          🟡 Intermediário
+          <span style="display:block; opacity:0.7; font-size:0.85rem;">
+            Nível equilibrado e dinâmico
+          </span>
         </button>
 
-        <button data-goal="logica" class="goal-btn">
-            🔢 Raciocínio Lógico
-            <span>Padrões, cálculos mentais e puzzles</span>
-        </button>
-
-        <button data-goal="disciplina" class="goal-btn">
-            🔥 Disciplina Mental
-            <span>Consistência, hábitos e micro-tarefas</span>
+        <button class="level-btn" data-level="avancado">
+          🔴 Avançado
+          <span style="display:block; opacity:0.7; font-size:0.85rem;">
+            Desafios intensos e rápidos
+          </span>
         </button>
 
       </div>
@@ -83,10 +84,10 @@ function startOnboarding() {
     </div>
   `);
 
-  document.querySelectorAll(".goal-btn").forEach(btn => {
+  document.querySelectorAll(".level-btn").forEach(btn => {
     btn.addEventListener("click", () => {
-      const goal = btn.getAttribute("data-goal");
-      saveGoal(goal);
+      const level = btn.getAttribute("data-level");
+      saveLevel(level);
     });
   });
 }
@@ -97,7 +98,13 @@ function startOnboarding() {
 function saveGoal(goal) {
   localStorage.setItem("userGoal", goal);
 
-  // sequência de testes do MVP
+  // Agora, depois de escolher o objetivo → mostrar escolha do nível
+  showLevelSelection();
+}
+function saveLevel(level) {
+  localStorage.setItem("userLevel", level);
+
+  // Agora sim iniciamos os testes
   startMemoryTest(app, () => {
     startFocusTest(app, () => {
       startLogicTest(app, () => {
@@ -106,6 +113,7 @@ function saveGoal(goal) {
     });
   });
 }
+
 
 // =========================
 // RESULTADO FINAL DOS TESTES
