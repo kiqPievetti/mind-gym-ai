@@ -3,6 +3,7 @@ import { startMemoryTest } from "./modules/memoryTest.js";
 import { startFocusTest } from "./modules/focusTest.js";
 import { startLogicTest } from "./modules/logicTest.js";
 
+
 const app = document.getElementById("app");
 
 // Helper para renderizar HTML e depois permitir bind de listeners
