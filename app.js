@@ -65,18 +65,49 @@ function showWelcomeScreen() {
 //  ONBOARDING
 // =========================
 function startOnboarding() {
-  render(`
-    <div class="screen">
-      <h1>Antes de começarmos…</h1>
-      <p>Qual seu objetivo principal?</p>
-      <div style="display:flex; flex-direction:column; gap:10px; margin-top:12px;">
-        <button data-goal="memoria" class="goalBtn">Melhorar Memória</button>
-        <button data-goal="foco" class="goalBtn">Aumentar Foco</button>
-        <button data-goal="logica" class="goalBtn">Raciocínio Lógico</button>
-        <button data-goal="disciplina" class="goalBtn">Disciplina Mental</button>
-      </div>
-    </div>
-  `);
+    app.innerHTML = `
+        <div class="screen" style="padding: 45px 30px;">
+
+            <h1 style="font-size: 2.1rem; margin-bottom: 10px;">
+                Vamos personalizar seu treino
+            </h1>
+
+            <p style="font-size: 1.1rem; margin-bottom: 25px; opacity: 0.85;">
+                Escolha seu foco principal. A IA vai criar um programa específico para você.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 20px;">
+
+                <button onclick="saveGoal('memoria')" class="goal-btn">
+                    🧠 Melhorar Memória
+                    <span>Exercícios de retenção e padrões</span>
+                </button>
+
+                <button onclick="saveGoal('foco')" class="goal-btn">
+                    🎯 Aumentar Foco
+                    <span>Reação, atenção sustentada e precisão</span>
+                </button>
+
+                <button onclick="saveGoal('logica')" class="goal-btn">
+                    🔢 Raciocínio Lógico
+                    <span>Padrões, cálculos mentais e puzzles</span>
+                </button>
+
+                <button onclick="saveGoal('disciplina')" class="goal-btn">
+                    🔥 Disciplina Mental
+                    <span>Consistência, hábitos e micro-tarefas</span>
+                </button>
+
+            </div>
+
+            <p style="margin-top: 25px; font-size: 0.85rem; opacity: 0.4;">
+                A personalização leva menos de 30 segundos.
+            </p>
+
+        </div>
+    `;
+}
+
 
   document.querySelectorAll(".goalBtn").forEach(btn => {
     btn.addEventListener("click", () => {
