@@ -100,3 +100,53 @@ button {
     cursor: pointer;
     transition: 0.25s;
     font-weight: 600;
+
+/* Step Titles */
+.step-title {
+    font-size: 26px;
+    font-weight: 600;
+    color: #c084fc; /* roxo elegante */
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.step-subtitle {
+    font-size: 16px;
+    color: #bbb;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+/* Options Grid */
+.option-grid {
+    display: grid;
+    gap: 15px;
+}
+
+.option-card {
+    background: #1d1b27;
+    border: 1px solid #2a2636;
+    border-radius: 12px;
+    padding: 18px;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.option-card:hover {
+    border-color: #c084fc;
+    background: #2b2838;
+    scale: 1.03;
+}
+
+.option-card h3 {
+    margin: 0;
+    font-size: 20px;
+    color: #e9d5ff;
+}
+
+.option-card p {
+    margin: 8px 0 0;
+    color: #aaa;
+    font-size: 14px;
+}
