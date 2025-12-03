@@ -281,4 +281,16 @@ function selectLevel(level) {
     
     // Próxima etapa (iremos construir no próximo passo)
     showNextStage();
+  function showLevelStep() {
+    document.getElementById("choose-goal").classList.add("hidden");
+    document.getElementById("choose-level").classList.remove("hidden");
+}
+function selectGoal(goal) {
+    userData.goal = goal;
+    console.log("Objetivo selecionado:", goal);
+
+    // Agora avança para o passo de níveis
+    showLevelStep();
+}
+
 }
