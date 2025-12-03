@@ -1,3 +1,6 @@
+/* ===========================
+   RESET
+=========================== */
 * {
     margin: 0;
     padding: 0;
@@ -6,54 +9,63 @@
 }
 
 body {
-    background: #0f0f0f;
-    color: #fff;
+    background: #0d0b12;
+    color: #ffffff;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 20px;
 }
 
+/* ===========================
+   APP AREA
+=========================== */
 #app {
     width: 100%;
-    max-width: 450px;
-    padding: 20px;
+    max-width: 500px;
     text-align: center;
 }
 
+/* ===========================
+   SCREEN CONTAINER
+=========================== */
 .screen {
-    animation: fadeIn 0.3s ease-in-out;
+    background: rgba(20, 15, 35, 0.9);
+    padding: 35px 25px;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(150, 70, 255, 0.25);
+    border: 1px solid rgba(150, 70, 255, 0.2);
+    backdrop-filter: blur(6px);
+    animation: fadeIn 0.3s ease;
 }
 
-h1 {
-    font-size: 2.4rem;
-    font-weight: 800;
-    margin-bottom: 20px;
+.screen h1 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+    background: linear-gradient(90deg, #b56aff, #8b4dff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-p {
-    opacity: 0.8;
-    margin-bottom: 25px;
-    line-height: 1.6;
-}
-
-button {
-    padding: 15px 25px;
-    background: linear-gradient(90deg, #6a00ff, #b700ff);
-    border: none;
-    border-radius: 10px;
-    color: #fff;
+.screen p {
     font-size: 1.1rem;
+    margin-bottom: 20px;
+    opacity: 0.85;
+}
+
+/* ===========================
+   BUTTONS
+=========================== */
+button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 12px;
+
+    background: linear-gradient(130deg, #7a30ff, #a75bff);
+    border: none;
+    border-radius: 12px;
+
+    font-size: 1.1rem;
+    color: #fff;
     cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-}
-
+    transition: 0.25s;
+    font-weight: 600;
