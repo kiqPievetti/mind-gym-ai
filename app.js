@@ -136,18 +136,49 @@ function saveGoal(goal) {
 // =========================
 //  MOSTRA RESULTADO FINAL / PLANO DIARIO
 // =========================
-function showFinalResults() {
-  const goal = localStorage.getItem("userGoal") || "memoria";
-  render(`
-    <div class="screen">
-      <h1>Avaliação Final</h1>
-      <p>Você concluiu os testes cognitivos!</p>
-      <p>Objetivo escolhido: <strong>${goal}</strong></p>
-      <button id="verPlano">Ver plano diário</button>
-    </div>
-  `);
-  document.getElementById("verPlano").addEventListener("click", showDailyPlan);
+function showResults(reactionTime) {
+    const goal = localStorage.getItem("userGoal");
+
+    let nivel = "";
+    if (reactionTime < 220) nivel = "Excelente";
+    else if (reactionTime < 350) nivel = "Bom";
+    else if (reactionTime < 500) nivel = "Regular";
+    else nivel = "Precisa melhorar";
+
+    app.innerHTML = `
+        <div class="screen" style="padding: 45px 30px;">
+
+            <h1 style="font-size: 2rem; margin-bottom: 10px;">
+                Seu Desempenho
+            </h1>
+
+            <p style="font-size: 1.1rem; margin-bottom: 25px; opacity:0.85;">
+                Tempo de reação:
+                <strong style="color:#b26bff">${reactionTime} ms</strong>
+            </p>
+
+            <div style="
+                padding: 20px;
+                background: rgba(150,70,255,0.15);
+                border-radius: 14px;
+                border: 1px solid rgba(150,70,255,0.25);
+                margin-bottom: 25px;
+                box-shadow: inset 0 0 18px rgba(150,70,255,0.25);
+            ">
+                <p style="font-size:1.1rem; margin-bottom:8px;">
+                    <strong>Nível: ${nivel}</strong>
+                </p>
+                <p style="font-size:0.9rem; opacity:0.8;">
+                    Objetivo escolhido: <u>${goal}</u>
+                </p>
+            </div>
+
+            <button onclick="showDailyPlan()">Ver Plano Diário</button>
+
+        </div>
+    `;
 }
+
 
 // =========================
 //  PLANO DIÁRIO (MVP simples)
@@ -177,3 +208,63 @@ function showDailyPlan() {
 
 // Inicializa
 showWelcomeScreen();
+function startTest() {
+    app.innerHTML = `
+        <div class="screen" style="padding: 45px 30px;">
+
+            <h1 style="font-size: 2rem; margin-bottom: 10px;">
+                Teste de Foco Inicial
+            </h1>
+
+            <p style="font-size: 1rem; opacity: 0.75; margin-bottom: 20px;">
+                Quando o círculo ficar <strong style="color:#b26bff">roxo</strong>, toque o mais rápido possível.
+            </p>
+
+            <div id="focus-area" style="
+                width: 140px;
+                height: 140px;
+                margin: 40px auto;
+                border-radius: 50%;
+                background: rgba(255,255,255,0.08);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: 0.2s;
+                cursor: pointer;
+                box-shadow: 0 0 20px rgba(150,70,255,0.15);
+            ">
+            </div>
+
+            <p id="test-status" style="margin-top: 15px; opacity:0.5; font-size: 0.85rem;">
+                Aguarde o círculo mudar de cor…
+            </p>
+        </div>
+    `;
+
+    const area = document.getElementById("focus-area");
+    const status = document.getElementById("test-status");
+
+    let canClick = false;
+    let startTime;
+
+    // Tempo aleatório antes do círculo ficar roxo
+    const delay = Math.random() * 2500 + 2000;
+
+    setTimeout(() => {
+        area.style.background = "rgba(150,70,255,0.6)";
+        area.style.boxShadow = "0 0 25px rgba(150,70,255,0.6)";
+        status.innerHTML = "Clique agora!";
+        canClick = true;
+        startTime = Date.now();
+    }, delay);
+
+    area.onclick = () => {
+        if (!canClick) {
+            status.innerHTML = "Muito cedo! Tente esperar a cor roxa.";
+            status.style.color = "#ff6b6b";
+            return;
+        }
+        const reaction = Date.now() - startTime;
+        showResults(reaction);
+    };
+}
