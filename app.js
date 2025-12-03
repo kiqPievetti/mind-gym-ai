@@ -15,14 +15,48 @@ function render(html) {
 //  TELA INICIAL
 // =========================
 function showWelcomeScreen() {
-  render(`
-    <div class="screen">
-      <h1>Mind Gym AI</h1>
-      <p>A primeira academia de inteligência do mundo.<br>
-      Treine foco, memória, lógica e disciplina com IA.</p>
-      <button id="startBtn">Começar</button>
-    </div>
-  `);
+    app.innerHTML = `
+        <div class="screen" style="padding: 45px 30px;">
+            
+            <h1 style="font-size: 2.4rem; margin-bottom: 18px;">
+                Mind Gym AI
+            </h1>
+
+            <p style="font-size: 1.15rem; margin-bottom: 30px; opacity: 0.9;">
+                A primeira <strong>academia de inteligência</strong> do mundo.
+                Melhore foco, memória, lógica e disciplina com treinos guiados por IA.
+            </p>
+
+            <div style="
+                margin: 25px 0;
+                background: rgba(150,70,255,0.12);
+                padding: 20px;
+                border-radius: 14px;
+                border: 1px solid rgba(150,70,255,0.25);
+                box-shadow: inset 0 0 18px rgba(150,70,255,0.2);
+            ">
+                <p style="font-size: 1rem; opacity: 0.85;">
+                    🔥 Em menos de 2 minutos você terá:
+                </p>
+                <ul style="margin-top: 12px; text-align:left;">
+                    <li>• Um perfil cognitivo inicial</li>
+                    <li>• Seu primeiro teste mental</li>
+                    <li>• Seu plano diário personalizado</li>
+                </ul>
+            </div>
+
+            <button onclick="startOnboarding()" style="margin-top: 25px;">
+                Começar Agora
+            </button>
+
+            <p style="margin-top: 18px; font-size: 0.85rem; opacity: 0.5;">
+                Versão MVP — Treine sua mente enquanto a IA evolui.
+            </p>
+
+        </div>
+    `;
+}
+
 
   document.getElementById("startBtn").addEventListener("click", startOnboarding);
 }
